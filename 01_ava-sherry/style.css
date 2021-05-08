@@ -142,3 +142,34 @@ section.feed img {
   object-fit: cover;
   grid-column: span 2;
 }
+
+/* --- BARBA --- */
+
+/* transition active effect  */
+.fade-leave-active,
+.fade-enter-active {
+  transition: opacity var(--timing) var(--bezier),
+              transform var(--timing) var(--bezier);
+}
+
+/* Initial state */
+.fade-leave {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translate(0, 30px);
+}
+
+/* end state */
+.fade-leave-to {
+  opacity: 0;
+  transform: translate(0,30px);
+}
+
+.fade-enter-to {
+  opacity: 1;
+  transform: translate(0, 0);
+}
