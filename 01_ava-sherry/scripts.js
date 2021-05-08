@@ -1,3 +1,5 @@
+const bodyTag = document.querySelector("body")
+
 // usar barba css
 barba.use(barbaCss)
 
@@ -6,9 +8,21 @@ barba.init({
   transitions: [
     {
       name: "fade",
+      once() {},
       beforeEnter({ current, next, trigger })  {
         scrolltop()
         selectNav(next)
+      }
+    }
+  ],
+  views: [
+    {
+      namespace: "feed",
+      beforeEnter() {
+        bodyTag.classList.add("feed");
+      },
+      beforeLeave() {
+        bodyTag.classList.remove("feed");
       }
     }
   ]

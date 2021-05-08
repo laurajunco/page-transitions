@@ -147,7 +147,8 @@ section.feed img {
 
 /* transition active effect  */
 .fade-leave-active,
-.fade-enter-active {
+.fade-enter-active,
+.fade-once-active {
   transition: opacity var(--timing) var(--bezier),
               transform var(--timing) var(--bezier);
 }
@@ -158,7 +159,8 @@ section.feed img {
   transform: translate(0, 0);
 }
 
-.fade-enter {
+.fade-enter,
+.fade-once {
   opacity: 0;
   transform: translate(0, 30px);
 }
@@ -169,7 +171,46 @@ section.feed img {
   transform: translate(0,30px);
 }
 
-.fade-enter-to {
+.fade-enter-to,
+.fade-once-to {
   opacity: 1;
   transform: translate(0, 0);
 }
+
+/* page reload animation */
+@keyframes fadein {
+  0% { 
+    opacity: 0;
+    transform: translate(0,30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+header h1,
+header p,
+header nav,
+footer {
+  animation: fadein var(--timing) var(--bezier) both;
+}
+
+header h1 {
+  animation-delay: var(--timing);
+}
+
+header p {
+  animation-delay: calc( 2 * var(--timing));
+}
+
+header nav {
+  animation-delay: calc( 3 * var(--timing));
+}
+
+
+footer {
+  animation-delay: calc( 4 * var(--timing));
+}
+
+
