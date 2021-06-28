@@ -19,3 +19,5 @@ headers.forEach(header =>
 imageHolders.forEach(holder => 
   observer.observe(holder)
 )
+
+
