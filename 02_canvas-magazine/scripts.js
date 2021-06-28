@@ -20,4 +20,13 @@ imageHolders.forEach(holder =>
   observer.observe(holder)
 )
 
-
+barba.init({
+  transitions: [
+    {
+      name: 'switch',
+      
+    }
+  ],
+  views: [],
+  debug: true 
+})
