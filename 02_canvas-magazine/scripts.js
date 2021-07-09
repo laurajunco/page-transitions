@@ -1,3 +1,4 @@
+const bodyTag = document.querySelector('body')
 const runScripts = () => {
   //intersection observer
   const headers = document.querySelectorAll('h2, h3')
@@ -28,12 +29,25 @@ barba.init({
   transitions: [
     {
       name: 'switch',
+      once({ current, next, trigger }) {
+        return new Promise(resolve => {
+          const timeline = gsap.timeline({
+            onComplete() {
+              resolve()
+            }
+          })
+
+          timeline.set(next.container, {opacity:0})
+            .to(next.container, {opacity:1, delay:1 })
+        })
+      },
       leave({ current, next, trigger }) {
 
         return new Promise(resolve => {
           const timeline = gsap.timeline({
             onComplete() {
               current.container.remove()
+              next.container.style.opacity = 0 //remove flicker
               resolve()
             }
           })
@@ -64,6 +78,16 @@ barba.init({
       }      
     }
   ],
-  views: [],
+  views: [
+    {
+      namespace: 'product',
+      beforeEnter(){
+        bodyTag.classList.add('product')
+      },
+      afterLeave() {
+        bodyTag.classList.remove('product')
+      }
+    }
+  ],
   debug: true 
 })
