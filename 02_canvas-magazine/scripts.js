@@ -23,22 +23,31 @@ const runScripts = () => {
   )
 }
 
-runScripts()
+gsap.set("article", { opacity: "0" })
 
 barba.init({
   transitions: [
     {
       name: 'switch',
-      once({ current, next, trigger }) {
+      once({ next }) {
         return new Promise(resolve => {
-          const timeline = gsap.timeline({
-            onComplete() {
-              resolve()
-            }
-          })
 
-          timeline.set(next.container, {opacity:0})
+          gsap.set(next.container, {opacity: 0})
+
+          const images = document.querySelectorAll('img')
+          imagesLoaded(images, () => {
+            const timeline = gsap.timeline({
+              onComplete() {
+                runScripts()
+                resolve()
+              }
+            })
+  
+            timeline
+            // .set(next.container, {opacity: 0})
             .to(next.container, {opacity:1, delay:1 })
+
+          })
         })
       },
       leave({ current, next, trigger }) {
